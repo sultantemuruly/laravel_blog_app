@@ -14,6 +14,15 @@
             <button type="submit">Logout</button>
         </form>
     </div>
+
+    <div>
+        <h2>Create a blog post</h2>
+        <form action="/create-post" method="POST" style="display: flex; flex-direction: column; gap: 10px; max-width: 400px;">
+            @csrf
+            <input name="title" type="text" placeholder="Title" />
+            <textarea name="body" placeholder="content..."></textarea>
+            <button type="submit">Create Post</button>
+    </div>
     @else
     <div style="display: flex; justify-content: center; align-items: flex-start; margin-top: 10%; gap: 50px;">
         <!-- Register Form -->
@@ -39,8 +48,7 @@
             </form>
         </div>
     </div>
-
-
+    
     @endauth
 </body>
 </html>
