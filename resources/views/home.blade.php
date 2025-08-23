@@ -5,15 +5,42 @@
     <title>Document</title>
 </head>
 <body>
-    <div style="text-align: center; margin-top: 20%;">
-        <h2>Register</h2>
-        <form action="/register" method="POST">
+    @auth
+    <div>
+        <h2>Welcome, {{ auth()->user()->name }}</h2>
+
+        <form action="/logout" method="POST">
             @csrf
-            <input name="name" type="text" placeholder="Name" /><br /><br />
-            <input name="email" type="email" placeholder="Email" /><br /><br />
-            <input name="password" type="password" placeholder="Password" /><br /><br />
-            <button type="submit">Register</button> 
+            <button type="submit">Logout</button>
         </form>
     </div>
+    @else
+    <div style="display: flex; justify-content: center; align-items: flex-start; margin-top: 10%; gap: 50px;">
+        <!-- Register Form -->
+        <div style="flex: 1; max-width: 300px; text-align: center;">
+            <h2>Register</h2>
+            <form action="/register" method="POST" style="display: flex; flex-direction: column; gap: 10px;">
+                @csrf
+                <input name="name" type="text" placeholder="Name" />
+                <input name="email" type="email" placeholder="Email" />
+                <input name="password" type="password" placeholder="Password" />
+                <button type="submit">Register</button> 
+            </form>
+        </div>
+
+        <!-- Login Form -->
+        <div style="flex: 1; max-width: 300px; text-align: center;">
+            <h2>Log in</h2>
+            <form action="/login" method="POST" style="display: flex; flex-direction: column; gap: 10px;">
+                @csrf
+                <input name="loginemail" type="email" placeholder="Email" />
+                <input name="loginpassword" type="password" placeholder="Password" />
+                <button type="submit">Log in</button> 
+            </form>
+        </div>
+    </div>
+
+
+    @endauth
 </body>
 </html>
