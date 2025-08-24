@@ -22,14 +22,21 @@
             <input name="title" type="text" placeholder="Title" />
             <textarea name="body" placeholder="content..."></textarea>
             <button type="submit">Create Post</button>
+        </form>
     </div>
 
     <div style="margin-top: 50px;">
         <h2>All Posts</h2>
         @foreach ($posts as $post)
             <div style="border: 1px solid black; padding: 10px; margin-bottom: 10px; max-width: 600px;">
-                <h3>{{ $post->title }}</h3>
+                <h3>{{ $post->title }} by {{$post->user->name}}</h3>
                 <p>{{ $post->body }}</p>
+                <p><a href="/edit-post/{{$post->id}}">Edit</a></p>
+                <form action="/delete-post/{{$post->id}}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Delete</button>
+                </form>
             </div>
         @endforeach
 
