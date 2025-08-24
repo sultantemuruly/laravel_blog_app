@@ -23,6 +23,17 @@
             <textarea name="body" placeholder="content..."></textarea>
             <button type="submit">Create Post</button>
     </div>
+
+    <div style="margin-top: 50px;">
+        <h2>All Posts</h2>
+        @foreach ($posts as $post)
+            <div style="border: 1px solid black; padding: 10px; margin-bottom: 10px; max-width: 600px;">
+                <h3>{{ $post->title }}</h3>
+                <p>{{ $post->body }}</p>
+            </div>
+        @endforeach
+
+    </div>
     @else
     <div style="display: flex; justify-content: center; align-items: flex-start; margin-top: 10%; gap: 50px;">
         <!-- Register Form -->

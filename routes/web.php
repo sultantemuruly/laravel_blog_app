@@ -1,11 +1,17 @@
 <?php
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
-    return view('home');
+    $post = [];
+    if (auth()->check()) {
+        $post = auth()->user()->posts()->latest()->get();
+    }
+    return view('home', ['posts' => $post]);
 });
 
 Route::post('/register', [UserController::class, 'register']);
